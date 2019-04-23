@@ -28,7 +28,7 @@ import com.msanti.springsecurity.model.LdapAuthStructure;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	
-	private Logger logger =  LoggerFactory.getLogger(WebSecurityConfig.class);
+//	private Logger logger =  LoggerFactory.getLogger(WebSecurityConfig.class);
 	
 	@Autowired
 	LdapAuthStructure ldapAuthStructure;
