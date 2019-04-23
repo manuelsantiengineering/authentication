@@ -98,7 +98,7 @@ public class LdapAuthRepositoryCustomImpl implements LdapAuthRepositoryCustom {
 		
 		Name dn = LdapNameBuilder.newInstance()
 			      .add("ou=users")
-			      .add("uid=bpatel")
+			      .add("uid=tomatito")
 			      .build();
 		
 		ctx.setDn(dn);
