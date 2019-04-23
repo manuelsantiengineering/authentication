@@ -25,7 +25,6 @@ public class LdapAuthService {
 	@Autowired
 	private LdapAuthRepository ldapAuthRepository;
 	
-	//Create
 	public void addUser(LdapAuthUser ldapAuthUser) {
 		Name dn = LdapNameBuilder
 			      .newInstance()
@@ -41,10 +40,9 @@ public class LdapAuthService {
 		}
 	}
 	
-	//Read
-	public LdapAuthUser getUser(String userName) {
-		
-		Optional<LdapAuthUser> ldapAuthUserOptional = ldapAuthRepository.
+	public LdapAuthUser getUser(String userName) {		
+		Optional<LdapAuthUser> ldapAuthUserOptional = 
+					ldapAuthRepository.
 					findOne(LdapQueryBuilder.query().where("uid").is(userName));
 		if(ldapAuthUserOptional.isPresent()) {
 			return ldapAuthUserOptional.get();
@@ -53,19 +51,19 @@ public class LdapAuthService {
 		}
 	}
 	
-	//Update
 	public void updateLdapUser(LdapAuthUser ldapUser) {
 		ldapAuthRepository.save(ldapUser);
 	}
 	
-	//Delete
 	public void deleteUser(String userName) {
 		
-		Optional<LdapAuthUser> ldapAuthUserOptional = ldapAuthRepository.findOne(LdapQueryBuilder.query().where("uid").is(userName));
+		Optional<LdapAuthUser> ldapAuthUserOptional = 
+				ldapAuthRepository
+				.findOne(LdapQueryBuilder.query().where("uid").is(userName));
 		if(ldapAuthUserOptional.isPresent()) {
 			ldapAuthRepository.delete(ldapAuthUserOptional.get());
 		}else {
-			logger.info("User with username "+userName+" does not exist ");
+			logger.info("User with username \""+userName+"\" does not exist ");
 		}
 	}
 
