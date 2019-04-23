@@ -1,7 +1,5 @@
 package com.msanti.springsecurity.controller;
 
-package com.nilangpatel.springauth.controller;
-
 import java.util.HashMap;
 import java.util.Map;
 
