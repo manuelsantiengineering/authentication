@@ -40,10 +40,10 @@ public class LdapAuthRepositoryCustomImpl implements LdapAuthRepositoryCustom {
 	@Override
 	public boolean authenticateLdapUserWithLdapQuery(String userName, String password) {		
 		try {
-		 ldapTemplate.authenticate(LdapQueryBuilder.query().where("uid").is(userName), password);
-		 return true;
+			ldapTemplate.authenticate(LdapQueryBuilder.query().where("uid").is(userName), password);
+			return true;
 		}catch(Exception e) {
-			logger.error("Exception occuired while authenticating user with user name "+userName,e.getMessage(),e);
+			logger.error("Exception while authenticating user with user name "+userName,e.getMessage(),e);
 		}
 		return false;
 	}
