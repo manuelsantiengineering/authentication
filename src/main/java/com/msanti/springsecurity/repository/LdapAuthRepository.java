@@ -9,6 +9,6 @@ import com.msanti.springsecurity.model.LdapAuthUser;
 
 
 @Repository
-public interface LdapAuthRepository extends LdapRepository<LdapAuthUser>,LdapAuthRepositoryCustom{
+public interface LdapAuthRepository extends LdapRepository<LdapAuthUser>, LdapAuthRepositoryCustom{
 
 }
