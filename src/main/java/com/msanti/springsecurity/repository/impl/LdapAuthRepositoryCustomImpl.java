@@ -24,7 +24,6 @@ import com.msanti.springsecurity.model.LdapAuthUser;
 import com.msanti.springsecurity.model.LdapGrantedAuthority;
 import com.msanti.springsecurity.repository.LdapAuthRepositoryCustom;
 
-
 @Repository
 public class LdapAuthRepositoryCustomImpl implements LdapAuthRepositoryCustom {
 
@@ -39,8 +38,7 @@ public class LdapAuthRepositoryCustomImpl implements LdapAuthRepositoryCustom {
 	}
 
 	@Override
-	public boolean authenticateLdapUserWithLdapQuery(String userName, String password) {
-		
+	public boolean authenticateLdapUserWithLdapQuery(String userName, String password) {		
 		try {
 		 ldapTemplate.authenticate(LdapQueryBuilder.query().where("uid").is(userName), password);
 		 return true;
