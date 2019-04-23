@@ -3,7 +3,7 @@ package com.msanti.springsecurity.repository;
 import java.util.List;
 
 import com.msanti.springsecurity.model.LdapAuthUser;
-import com.msanti.springsecurity.model.LdapGranntedAuthority;
+import com.msanti.springsecurity.model.LdapGrantedAuthority;
 
 
 public interface LdapAuthRepositoryCustom  {
@@ -20,6 +20,6 @@ public interface LdapAuthRepositoryCustom  {
     LdapAuthUser findByUid(String uid);
     List<LdapAuthUser> findAllWithTemplate();
     List<LdapAuthUser> findBySurname(String surName);
-    List<LdapGranntedAuthority> getUserAuthorities(String userName);
+    List<LdapGrantedAuthority> getUserAuthorities(String userName);
     
 }
