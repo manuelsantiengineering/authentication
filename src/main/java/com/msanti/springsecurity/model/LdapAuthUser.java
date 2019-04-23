@@ -14,6 +14,8 @@ import org.springframework.ldap.odm.annotations.Transient;
   objectClasses = {"top", "person", "organizationalPerson","inetOrgPerson"})
 public final class LdapAuthUser implements Persistable<Name> {
 
+	// There is no direct attribute, like id, in the LDAP entity, 
+	// but Spring Data needs some sort of unique identifier. 
 	@Id
     private Name id;
     
