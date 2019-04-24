@@ -14,8 +14,8 @@ public class LdapRoleMapper  implements ContextMapper<LdapGrantedAuthority>{
 	public LdapGrantedAuthority mapFromContext(Object ctx) throws NamingException {
 		DirContextAdapter adapter = (DirContextAdapter) ctx;
 		String role = adapter.getStringAttribute("cn");
-		LdapGrantedAuthority ldapGranntedAuthority = new LdapGrantedAuthority();
-		ldapGranntedAuthority.setAuthority(role);
-		return ldapGranntedAuthority;
+		LdapGrantedAuthority ldapGrantedAuthority = new LdapGrantedAuthority();
+		ldapGrantedAuthority.setAuthority(role);
+		return ldapGrantedAuthority;
 	}
 }

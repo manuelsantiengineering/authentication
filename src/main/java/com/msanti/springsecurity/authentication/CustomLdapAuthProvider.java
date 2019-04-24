@@ -29,8 +29,7 @@ public class CustomLdapAuthProvider implements AuthenticationProvider{
 
 		if(isAuthenticate == true) {
 			List<LdapGrantedAuthority> userRoles =  ldapAuthService.getUserAuthorities(userName);
-			return new UsernamePasswordAuthenticationToken(
-					userName, password, userRoles);
+			return new UsernamePasswordAuthenticationToken(userName, password, userRoles);
 		}else {
 			return null;
 		}
