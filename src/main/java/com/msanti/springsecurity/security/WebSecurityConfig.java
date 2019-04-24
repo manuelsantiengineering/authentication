@@ -28,7 +28,7 @@ import com.msanti.springsecurity.model.LdapAuthStructure;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	
-//	private Logger logger =  LoggerFactory.getLogger(WebSecurityConfig.class);
+	private Logger logger =  LoggerFactory.getLogger(WebSecurityConfig.class);
 	
 	@Autowired
 	LdapAuthStructure ldapAuthStructure;
@@ -46,8 +46,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     	protected void configure(HttpSecurity http) throws Exception {
     	   http.authorizeRequests()
     	   	.antMatchers("/","/ldapLogin","/login").permitAll()
-    		.antMatchers("/adminPage/").hasAnyAuthority("ROLE_ADMIN")
-    		.antMatchers("/userPage/").hasAnyAuthority("ROLE_USER","ROLE_ADMIN")
+    		.antMatchers("/adminPage/").hasAnyAuthority("ADMIN")
+    		.antMatchers("/userPage/").hasAnyAuthority("USER","ADMIN")
     		.anyRequest().fullyAuthenticated()
 //    			.and()
 //            .oauth2Login().loginPage("/login")
@@ -56,6 +56,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
             	.and()
             .logout()
             	.permitAll().logoutSuccessUrl("/login?logout=true");
+    	   
+    	   logger.info("Configure method is called to make the resources secure ...");
     	}
     	
     	
