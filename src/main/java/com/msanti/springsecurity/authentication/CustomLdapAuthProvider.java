@@ -1,4 +1,4 @@
-package com.msanti.springsecurity.authprovider;
+package com.msanti.springsecurity.authentication;
 
 
 import java.util.List;

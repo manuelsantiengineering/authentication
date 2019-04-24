@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.msanti.springsecurity.authprovider.CustomLdapAuthProvider;
+import com.msanti.springsecurity.authentication.CustomLdapAuthProvider;
 import com.msanti.springsecurity.constants.LdapAuthConstant;
 import com.msanti.springsecurity.model.LdapAuthUser;
 import com.msanti.springsecurity.service.LdapAuthService;
