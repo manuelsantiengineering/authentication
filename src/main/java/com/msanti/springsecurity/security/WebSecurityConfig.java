@@ -49,14 +49,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     		.antMatchers("/adminPage/").hasAnyAuthority("ADMIN")
     		.antMatchers("/userPage/").hasAnyAuthority("USER","ADMIN")
     		.anyRequest().fullyAuthenticated()
-//    			.and()
-//            .oauth2Login().loginPage("/login")
-//            	.defaultSuccessUrl("/privatePage",true)
-//            	.failureUrl("/login?error=true")
+    			.and()
+            .oauth2Login().loginPage("/login")
+            	.defaultSuccessUrl("/privatePage",true)
+            	.failureUrl("/login?error=true")
             	.and()
             .logout()
             	.permitAll().logoutSuccessUrl("/login?logout=true");
-    	   
+    	   super.configure(http);
     	   logger.info("Configure method is called to make the resources secure ...");
     	}
     	
