@@ -42,6 +42,9 @@ public class SpringLdapController {
 	@Autowired
 	private LdapAuthService ldapAuthService;
 
+	@Autowired
+	private ClientRegistrationRepository clientRegistrationRepository;
+	
 	@GetMapping("/")
 	public String showHomePage(Model model) {
 		logger.info("This is show home page method ");
@@ -71,9 +74,6 @@ public class SpringLdapController {
 	    return "user-page";
 	}
 	
-	@Autowired
-	private ClientRegistrationRepository clientRegistrationRepository;
-	
 	@GetMapping("/login")
 	public String showLoginPage(@RequestParam(value = "error",required = false) String error,
 			@RequestParam(value = "logout",	required = false) String logout,Model model) {
@@ -90,10 +90,11 @@ public class SpringLdapController {
 		String authorizationRequestBaseUri = "oauth2/authorization";
 		Map<String, String> oauth2AuthenticationUrls = new HashMap<String, String>();
 		
-		Iterable<ClientRegistration> clientRegistrations = (Iterable<ClientRegistration>) clientRegistrationRepository;
+		Iterable<ClientRegistration> clientRegistrations = 
+				(Iterable<ClientRegistration>) clientRegistrationRepository;
 		
 		clientRegistrations.forEach(registration -> 
-		oauth2AuthenticationUrls.put(registration.getClientName(), 
+				oauth2AuthenticationUrls.put(registration.getClientName(), 
 				authorizationRequestBaseUri + "/" + registration.getRegistrationId()));
 		model.addAttribute("urls", oauth2AuthenticationUrls);
 
