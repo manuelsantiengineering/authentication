@@ -48,9 +48,8 @@ public class LdapAuthRepositoryCustomImpl implements LdapAuthRepositoryCustom {
 		return false;
 	}
 	
-	/**
-	 * This method will return roles of given user.
-	 */
+	
+	// This method will return roles of given user.
 	@Override
 	public List<LdapGrantedAuthority> getUserAuthorities(String userName) {
 		AndFilter groupFilter = new AndFilter();
@@ -59,6 +58,7 @@ public class LdapAuthRepositoryCustomImpl implements LdapAuthRepositoryCustom {
 		List<LdapGrantedAuthority> userRoleLst = ldapTemplate.search(LdapQueryBuilder.query().filter(groupFilter),new LdapRoleMapper());
 		return userRoleLst;
 	}
+	
 	@Override
 	public boolean authenticateLdapUserWithContext(String userName, String password) {
 		DirContext ctx = null;
@@ -86,6 +86,7 @@ public class LdapAuthRepositoryCustomImpl implements LdapAuthRepositoryCustom {
 		ldapAuthUser.setIsNew(true);
 		ldapTemplate.create(ldapAuthUser);
 	}
+	
 	@Override
 	public void createByBindOperation(LdapAuthUser ldapAuthUser) {
 		

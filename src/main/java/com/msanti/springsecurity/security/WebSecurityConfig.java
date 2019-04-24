@@ -33,71 +33,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	LdapAuthStructure ldapAuthStructure;
 		
-		@Override
-		public void configure(WebSecurity web) throws Exception {
-			web.ignoring().antMatchers("/js/**");
-			web.ignoring().antMatchers("/css/**");
-		}
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		web.ignoring().antMatchers("/js/**");
+		web.ignoring().antMatchers("/css/**");
+	}
 
-		/**
-    	 * Use this method for OAuth authentication. While testing with LDAP authentication, just comment this method.
-    	 */
-    	@Override
-    	protected void configure(HttpSecurity http) throws Exception {
-    	   http.authorizeRequests()
-    	   	.antMatchers("/","/ldapLogin","/login").permitAll()
-    		.antMatchers("/adminPage/").hasAnyAuthority("ADMIN")
-    		.antMatchers("/userPage/").hasAnyAuthority("USER","ADMIN")
-    		.anyRequest().fullyAuthenticated()
-    			.and()
-            .oauth2Login().loginPage("/login")
-            	.defaultSuccessUrl("/privatePage",true)
-            	.failureUrl("/login?error=true")
-            	.and()
-            .logout()
-            	.permitAll().logoutSuccessUrl("/login?logout=true");
-    	   
-    	   logger.info("Configure method is called to make the resources secure ...");
-    	}
-    	
-    	
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+	   http.authorizeRequests()
+	   	.antMatchers("/","/ldapLogin","/login").permitAll()
+		.antMatchers("/adminPage/").hasAnyAuthority("ADMIN")
+		.antMatchers("/userPage/").hasAnyAuthority("USER","ADMIN")
+		.anyRequest().fullyAuthenticated()
+			.and()
+        .oauth2Login().loginPage("/login")
+        	.defaultSuccessUrl("/privatePage",true)
+        	.failureUrl("/login?error=true")
+        	.and()
+        .logout()
+        	.permitAll().logoutSuccessUrl("/login?logout=true");
+	   
+	   logger.info("Configure method is called to make the resources secure ...");
+	}
 		
-		/*
-		 * User below two methods only for LDAP authentication and authorization integration.
-		 * 
-		 */
-		/*@Override
-		protected void configure(HttpSecurity http) throws Exception {
-			http.authorizeRequests()
-				.antMatchers("/","/login").permitAll()
-				.antMatchers("/adminPage/").hasAnyAuthority("ADMIN")
-				.antMatchers("/userPage/").hasAnyAuthority("USER")
-				.anyRequest().authenticated()
-				.and()
-	        .formLogin().loginPage("/login").permitAll()
-	        	.defaultSuccessUrl("/privatePage",true)
-	        	.failureUrl("/login?error=true")
-	            .and()
-	        .logout()
-	            .permitAll().logoutSuccessUrl("/login?logout=true");
-		} 
-		@Override
-		protected void configure(AuthenticationManagerBuilder authManagerBuilder) throws Exception {
-			authManagerBuilder.ldapAuthentication()
-			.userDnPatterns(ldapAuthStructure.getUserDnPattern())
-			.userSearchBase(ldapAuthStructure.getUserSearchBase())
-			.userSearchFilter("uid={0}").rolePrefix("")
-			.groupSearchBase(ldapAuthStructure.getGroupSearchBase())
-			.groupSearchFilter("member={0}").rolePrefix("")
-			.contextSource()
-				.url(ldapAuthStructure.getLdapUrl()+"/"+ldapAuthStructure.getLdapBase())
-				.managerDn(ldapAuthStructure.getLdapManagerDn()).managerPassword(ldapAuthStructure.getLdapManagerPwd())
-				.and()
-			.passwordCompare()
-				.passwordEncoder(new LdapShaPasswordEncoder())
-				.passwordAttribute("userPassword");
-		} */
-	
-	
-	
 }

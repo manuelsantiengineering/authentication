@@ -43,7 +43,10 @@ public class SpringLdapController {
 	private LdapAuthService ldapAuthService;
 
 	@Autowired
-	private ClientRegistrationRepository clientRegistrationRepository;
+	private ClientRegistrationRepository clientRegistrationRepository;	
+	
+	@Autowired
+	CustomLdapAuthProvider customLdapAuthProvider;
 	
 	@GetMapping("/")
 	public String showHomePage(Model model) {
@@ -102,16 +105,15 @@ public class SpringLdapController {
 		
 		return "login";
 	}
-	
-	@Autowired
-	CustomLdapAuthProvider customLdapAuthProvider;
 
 	@PostMapping("/ldapLogin")
-	public String ldapAuthenticate(HttpServletRequest req,@RequestParam(value = "username",required = true) String username,
-			@RequestParam(value = "password",	required = true) String password,RedirectAttributes redirectAttributes) {
+	public String ldapAuthenticate(HttpServletRequest req,
+			@RequestParam(value = "username",required = true) String username,
+			@RequestParam(value = "password",	required = true) String password,
+			RedirectAttributes redirectAttributes) {
 		
-		UsernamePasswordAuthenticationToken authReq
-		= new UsernamePasswordAuthenticationToken(username, password);
+		UsernamePasswordAuthenticationToken authReq =
+				new UsernamePasswordAuthenticationToken(username, password);
 		Authentication auth = customLdapAuthProvider.authenticate(authReq);
 		if(auth !=null) {
 			logger.info(" If user is authenticated  .... "+auth.isAuthenticated());
