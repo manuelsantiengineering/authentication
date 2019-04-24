@@ -56,7 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
             	.and()
             .logout()
             	.permitAll().logoutSuccessUrl("/login?logout=true");
-    	   super.configure(http);
+    	   
     	   logger.info("Configure method is called to make the resources secure ...");
     	}
     	
